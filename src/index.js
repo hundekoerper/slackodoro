@@ -19,10 +19,12 @@ const pomodoroComponent = {
     let counter;
 
     vnode.state.time = 0;
+
     vnode.state.startTimer = () => {
       if (!vnode.state.time) {
-        vnode.state.time = currentDuration;
+        return;
       }
+
       counter = setInterval(() => {
         vnode.state.time--;
         m.redraw();
@@ -30,6 +32,10 @@ const pomodoroComponent = {
           clearInterval(counter);
         }
       }, 1000);
+    };
+
+    vnode.state.pauseTimer = () => {
+      clearInterval(counter);
     };
 
     vnode.state.resetTimer = () => {
@@ -53,7 +59,7 @@ const pomodoroComponent = {
       timerView(vnode.state.time),
       m('nav', [
         m('button[type="button"]', { onclick: vnode.state.startTimer }, 'Start'),
-        m('button[type="button"]', {}, 'Pause'),
+        m('button[type="button"]', { onclick: vnode.state.pauseTimer }, 'Pause'),
         m('button[type="button"]', { onclick: vnode.state.resetTimer }, 'Reset')
       ])
     ]);
