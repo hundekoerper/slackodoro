@@ -3,6 +3,10 @@
 const m = require('mithril');
 const domready = require('domready');
 
+const pomodoroDuration = 1500;
+const shortBreakDuration = 300;
+const longBreakDuration = 900;
+
 function timerView(timeInSeconds) {
   let minutes = Math.floor(timeInSeconds / 60);
   let seconds = timeInSeconds % 60;
@@ -25,6 +29,11 @@ const pomodoroComponent = {
   view(vnode) {
     return m('main', [
       m('h1', 'Pomodoro Timer'),
+      m('nav', [
+        m('button[type="button"]', { onclick: () => { vnode.state.time = pomodoroDuration; } }, 'Pomodoro'),
+        m('button[type="button"]', { onclick: () => { vnode.state.time = shortBreakDuration; } }, 'Short break'),
+        m('button[type="button"]', { onclick: () => { vnode.state.time = longBreakDuration; } }, 'Long Break')
+      ]),
       timerView(vnode.state.time),
       m('nav', [
         m('button[type="button"]', {
@@ -35,12 +44,7 @@ const pomodoroComponent = {
         m('button[type="button"]', {}, 'Pause'),
         m('button[type="button"]', {
           onclick: () => { vnode.state.time = 0; }
-        }, 'Reset'),
-        m('button[type="button"]', {
-          onclick: () => {
-            vnode.state.time = 1500;
-          }
-        }, 'drrrt')
+        }, 'Reset')
       ])
     ]);
   }
