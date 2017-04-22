@@ -57,16 +57,16 @@ const pomodoroComponent = {
   view(vnode) {
     return m('main', [
       m('h1', 'Pomodoro Timer'),
-      m('nav', [
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(pomodoroDuration); } }, 'Pomodoro'),
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(shortBreakDuration); } }, 'Short break'),
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(longBreakDuration); } }, 'Long Break')
-      ]),
       timerView(vnode.state.time),
       m('nav', [
         m('button[type="button"]', { onclick: vnode.state.startTimer }, 'Start'),
         m('button[type="button"]', { onclick: vnode.state.pauseTimer }, 'Pause'),
         m('button[type="button"]', { onclick: vnode.state.resetTimer }, 'Reset')
+      ]),
+      m('.durationSelection', [
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(pomodoroDuration); } }, 'Pomodoro'),
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(shortBreakDuration); } }, 'Short break'),
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(longBreakDuration); } }, 'Long Break')
       ])
     ]);
   }

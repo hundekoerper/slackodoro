@@ -1,0 +1,35 @@
+:root {
+  --main-background-color: #f72727;
+  --duration-button-background-color: rgba(0, 0, 0, .5);
+
+  --font-color: white
+}
+
+body {
+  background: var(--main-background-color);
+  color: var(--font-color);
+
+  font-family: 'Droid Sans', sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+time {
+  font-size: 8rem;
+  user-select: none;
+}
+
+.durationSelection button{
+  background: var(--duration-button-background-color);
+  color: var(--font-color);
+
+  width: 8rem;
+  padding: 1rem;
+  margin: .5rem;
+  border: none;
+  border-radius: 5px;
+}
