@@ -7,10 +7,16 @@ const pomodoroDuration = 1500;
 const shortBreakDuration = 300;
 const longBreakDuration = 900;
 
+
+
+function padWithZeros(number) {
+  return number < 10 ? `0${number}` : `${number}`;
+}
+
 function timerView(timeInSeconds) {
   let minutes = Math.floor(timeInSeconds / 60);
   let seconds = timeInSeconds % 60;
-  return m('time', `${minutes}:${seconds}`);
+  return m('time', `${padWithZeros(minutes)}:${padWithZeros(seconds)}`);
 }
 
 const pomodoroComponent = {
@@ -45,7 +51,7 @@ const pomodoroComponent = {
 
     vnode.state.setTimer = (duration) => {
       currentDuration = duration;
-      vnode.state.time = duration;
+      vnode.state.resetTimer();
     };
   },
   view(vnode) {
