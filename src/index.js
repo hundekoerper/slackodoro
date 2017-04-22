@@ -2,12 +2,11 @@
 
 const m = require('mithril');
 const domready = require('domready');
+const icon = require('./src/icons/icon');
 
 const pomodoroDuration = 1500;
 const shortBreakDuration = 300;
 const longBreakDuration = 900;
-
-
 
 function padWithZeros(number) {
   return number < 10 ? `0${number}` : `${number}`;
@@ -59,9 +58,9 @@ const pomodoroComponent = {
       m('h1', 'Pomodoro Timer'),
       timerView(vnode.state.time),
       m('nav', [
-        m('button[type="button"]', { onclick: vnode.state.startTimer }, 'Start'),
-        m('button[type="button"]', { onclick: vnode.state.pauseTimer }, 'Pause'),
-        m('button[type="button"]', { onclick: vnode.state.resetTimer }, 'Reset')
+        icon('play', { onclick: vnode.state.startTimer }),
+        icon('pause', { onclick: vnode.state.pauseTimer }),
+        icon('stop', { onclick: vnode.state.resetTimer })
       ]),
       m('.durationSelection', [
         m('button[type="button"]', { onclick: () => { vnode.state.setTimer(pomodoroDuration); } }, 'Pomodoro'),

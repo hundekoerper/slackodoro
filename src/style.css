@@ -23,6 +23,16 @@ time {
   user-select: none;
 }
 
+nav {
+  margin-bottom: 2rem;
+}
+
+nav icon {
+  padding: 1rem;
+  fill: var(--font-color);
+  cursor: pointer;
+}
+
 .durationSelection button{
   background: var(--duration-button-background-color);
   color: var(--font-color);
@@ -32,4 +42,6 @@ time {
   margin: .5rem;
   border: none;
   border-radius: 5px;
+
+  cursor: pointer;
 }
