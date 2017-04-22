@@ -15,36 +15,46 @@ function timerView(timeInSeconds) {
 
 const pomodoroComponent = {
   oninit(vnode) {
+    vnode.state.currentDuration = 0;
     vnode.state.time = 0;
-    vnode.state.countdown = () => {
-      const counter = setInterval(() => {
+
+    vnode.state.startTimer = () => {
+      if (!vnode.state.time) {
+        vnode.state.time = vnode.state.currentDuration;
+      }
+
+      vnode.state.counter = setInterval(() => {
         vnode.state.time--;
         m.redraw();
         if (vnode.state.time === 0) {
-          clearInterval(counter);
+          clearInterval(vnode.state.counter);
         }
       }, 1000);
+    };
+
+    vnode.state.resetTimer = () => {
+      clearInterval(vnode.state.counter);
+      vnode.state.time = vnode.state.currentDuration;
+    };
+
+    vnode.state.setTimer = (duration) => {
+      vnode.state.currentDuration = duration;
+      vnode.state.time = duration;
     };
   },
   view(vnode) {
     return m('main', [
       m('h1', 'Pomodoro Timer'),
       m('nav', [
-        m('button[type="button"]', { onclick: () => { vnode.state.time = pomodoroDuration; } }, 'Pomodoro'),
-        m('button[type="button"]', { onclick: () => { vnode.state.time = shortBreakDuration; } }, 'Short break'),
-        m('button[type="button"]', { onclick: () => { vnode.state.time = longBreakDuration; } }, 'Long Break')
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(pomodoroDuration); } }, 'Pomodoro'),
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(shortBreakDuration); } }, 'Short break'),
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(longBreakDuration); } }, 'Long Break')
       ]),
       timerView(vnode.state.time),
       m('nav', [
-        m('button[type="button"]', {
-          onclick: () => {
-            vnode.state.countdown(vnode.state.time);
-          }
-        }, 'Start'),
+        m('button[type="button"]', { onclick: vnode.state.startTimer }, 'Start'),
         m('button[type="button"]', {}, 'Pause'),
-        m('button[type="button"]', {
-          onclick: () => { vnode.state.time = 0; }
-        }, 'Reset')
+        m('button[type="button"]', { onclick: vnode.state.resetTimer }, 'Reset')
       ])
     ]);
   }
