@@ -15,30 +15,30 @@ function timerView(timeInSeconds) {
 
 const pomodoroComponent = {
   oninit(vnode) {
-    vnode.state.currentDuration = 0;
-    vnode.state.time = 0;
+    let currentDuration = 0;
+    let counter;
 
+    vnode.state.time = 0;
     vnode.state.startTimer = () => {
       if (!vnode.state.time) {
-        vnode.state.time = vnode.state.currentDuration;
+        vnode.state.time = currentDuration;
       }
-
-      vnode.state.counter = setInterval(() => {
+      counter = setInterval(() => {
         vnode.state.time--;
         m.redraw();
         if (vnode.state.time === 0) {
-          clearInterval(vnode.state.counter);
+          clearInterval(counter);
         }
       }, 1000);
     };
 
     vnode.state.resetTimer = () => {
-      clearInterval(vnode.state.counter);
-      vnode.state.time = vnode.state.currentDuration;
+      clearInterval(counter);
+      vnode.state.time = currentDuration;
     };
 
     vnode.state.setTimer = (duration) => {
-      vnode.state.currentDuration = duration;
+      currentDuration = duration;
       vnode.state.time = duration;
     };
   },
