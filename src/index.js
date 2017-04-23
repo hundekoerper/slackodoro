@@ -13,6 +13,10 @@ function padWithZeros(number) {
   return number < 10 ? `0${number}` : `${number}`;
 }
 
+function showNotification(message) {
+  return new Notification('Slackodoro', { body: message });
+}
+
 function timerView(timeInSeconds) {
   let minutes = Math.floor(timeInSeconds / 60);
   let seconds = timeInSeconds % 60;
@@ -37,6 +41,7 @@ const pomodoroComponent = {
         vnode.state.time--;
         m.redraw();
         if (vnode.state.time === 0) {
+          showNotification('Pomodoro done. Time for a break!');
           clearInterval(counter);
         }
       }, 1000);
