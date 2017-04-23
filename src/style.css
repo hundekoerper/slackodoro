@@ -2,14 +2,17 @@
   --main-background-color: #f72727;
   --duration-button-background-color: rgba(0, 0, 0, .5);
 
-  --font-color: white
+  --font-color: white;
+  --font-family: 'Droid Sans', sans-serif;
+
+  --content-size: 500px;
 }
 
 body {
   background: var(--main-background-color);
   color: var(--font-color);
 
-  font-family: 'Droid Sans', sans-serif;
+  font-family: var(--font-family);
 }
 
 main {
@@ -18,7 +21,21 @@ main {
   align-items: center;
 }
 
+content {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: var(--content-size);
+  height: var(--content-size);
+}
+
 time {
+  position: absolute;
+
   font-size: 8rem;
   user-select: none;
 }
@@ -44,4 +61,10 @@ nav icon {
   border-radius: 5px;
 
   cursor: pointer;
+}
+
+.progressbar {
+  transform: rotate(-90deg);
+  transform-origin: center center;
+  transition: stroke-dasharray linear 1000ms;
 }

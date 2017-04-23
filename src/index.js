@@ -3,6 +3,7 @@
 const m = require('mithril');
 const domready = require('domready');
 const icon = require('./src/icons/icon');
+const progressCircleView = require('./src/progressCircleView');
 
 const pomodoroDuration = 1500;
 const shortBreakDuration = 300;
@@ -20,10 +21,10 @@ function timerView(timeInSeconds) {
 
 const pomodoroComponent = {
   oninit(vnode) {
-    let currentDuration = 0;
     let counter;
 
     vnode.state.isPaused = true;
+    vnode.state.currentDuration = 0;
     vnode.state.time = 0;
 
     vnode.state.startTimer = () => {
@@ -49,18 +50,21 @@ const pomodoroComponent = {
     vnode.state.resetTimer = () => {
       vnode.state.isPaused = true;
       clearInterval(counter);
-      vnode.state.time = currentDuration;
+      vnode.state.time = vnode.state.currentDuration;
     };
 
     vnode.state.setTimer = (duration) => {
-      currentDuration = duration;
+      vnode.state.currentDuration = duration;
       vnode.state.resetTimer();
     };
   },
   view(vnode) {
     return m('main', [
       m('h1', 'Pomodoro Timer'),
-      timerView(vnode.state.time),
+      m('content', [
+        progressCircleView(vnode.state),
+        timerView(vnode.state.time),
+      ]),
       m('nav', [
         vnode.state.isPaused
           ? icon('play', { onclick: vnode.state.startTimer })
