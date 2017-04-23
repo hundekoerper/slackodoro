@@ -60,7 +60,6 @@ const pomodoroComponent = {
   },
   view(vnode) {
     return m('main', [
-      m('h1', 'Pomodoro Timer'),
       m('content', [
         progressCircleView(vnode.state),
         timerView(vnode.state.time),
