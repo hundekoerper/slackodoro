@@ -23,6 +23,7 @@ const pomodoroComponent = {
     let currentDuration = 0;
     let counter;
 
+    vnode.state.isPaused = true;
     vnode.state.time = 0;
 
     vnode.state.startTimer = () => {
@@ -30,6 +31,7 @@ const pomodoroComponent = {
         return;
       }
 
+      vnode.state.isPaused = false;
       counter = setInterval(() => {
         vnode.state.time--;
         m.redraw();
@@ -40,10 +42,12 @@ const pomodoroComponent = {
     };
 
     vnode.state.pauseTimer = () => {
+      vnode.state.isPaused = true;
       clearInterval(counter);
     };
 
     vnode.state.resetTimer = () => {
+      vnode.state.isPaused = true;
       clearInterval(counter);
       vnode.state.time = currentDuration;
     };
@@ -58,8 +62,9 @@ const pomodoroComponent = {
       m('h1', 'Pomodoro Timer'),
       timerView(vnode.state.time),
       m('nav', [
-        icon('play', { onclick: vnode.state.startTimer }),
-        icon('pause', { onclick: vnode.state.pauseTimer }),
+        vnode.state.isPaused
+          ? icon('play', { onclick: vnode.state.startTimer })
+          : icon('pause', { onclick: vnode.state.pauseTimer }),
         icon('stop', { onclick: vnode.state.resetTimer })
       ]),
       m('.durationSelection', [
