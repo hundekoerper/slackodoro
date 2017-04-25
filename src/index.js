@@ -2,19 +2,18 @@
 
 const m = require('mithril');
 const domready = require('domready');
+const config = require('./src/config');
 const icon = require('./src/icons/icon');
 const progressCircleView = require('./src/progressCircleView');
-
-const pomodoroDuration = 1500;
-const shortBreakDuration = 300;
-const longBreakDuration = 900;
 
 function padWithZeros(number) {
   return number < 10 ? `0${number}` : `${number}`;
 }
 
 function showNotification(message) {
-  return new Notification('Slackodoro', { body: message });
+  const notification = new Notification('Slackodoro', { body: message });
+  notification.silent = config.silentNotification;
+  return notification;
 }
 
 function timerView(timeInSeconds) {
@@ -27,9 +26,11 @@ const pomodoroComponent = {
   oninit(vnode) {
     let counter;
 
-    vnode.state.isPaused = true;
-    vnode.state.currentDuration = 0;
-    vnode.state.time = 0;
+    vnode.state = {
+      isPaused: true,
+      currentDuration: 0,
+      time: 0
+    };
 
     vnode.state.startTimer = () => {
       if (!vnode.state.time) {
@@ -76,9 +77,9 @@ const pomodoroComponent = {
         icon('stop', { onclick: vnode.state.resetTimer })
       ]),
       m('.durationSelection', [
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(pomodoroDuration); } }, 'Pomodoro'),
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(shortBreakDuration); } }, 'Short break'),
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(longBreakDuration); } }, 'Long Break')
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.pomodoroDuration); } }, 'Pomodoro'),
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.shortBreakDuration); } }, 'Short break'),
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.longBreakDuration); } }, 'Long Break')
       ])
     ]);
   }
