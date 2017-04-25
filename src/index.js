@@ -16,6 +16,10 @@ function showNotification(message) {
   return notification;
 }
 
+function showSettingsView() {
+  console.log('drrrt');
+}
+
 function timerView(timeInSeconds) {
   let minutes = Math.floor(timeInSeconds / 60);
   let seconds = timeInSeconds % 60;
@@ -66,6 +70,9 @@ const pomodoroComponent = {
   },
   view(vnode) {
     return m('main', [
+      m('aside', [
+        icon('settings', { onclick: showSettingsView })
+      ]),
       m('content', [
         progressCircleView(vnode.state),
         timerView(vnode.state.time),

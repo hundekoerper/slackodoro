@@ -21,6 +21,17 @@ main {
   align-items: center;
 }
 
+aside {
+  display: flex;
+  justify-content: flex-end;
+
+  width: 100%;
+}
+
+aside icon {
+  padding: 1rem;
+}
+
 content {
   position: relative;
 
@@ -44,7 +55,7 @@ nav {
   margin-bottom: 2rem;
 }
 
-nav icon {
+icon {
   fill: var(--font-color);
   padding: 2rem;
   cursor: pointer;
