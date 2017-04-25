@@ -2,8 +2,11 @@
 
 const m = require('mithril');
 
-const MAX_DASH = 1680;
+const SIZE = 420;
+const MAX_DASH = SIZE * 3;
+
 const strokeColor = '#FFFFFF';
+const strokeWidth = 10;
 
 const groupProperties = {
   stroke: 'none',
@@ -16,21 +19,21 @@ const groupProperties = {
 
 const backgroundStrokeProperties = {
   stroke: strokeColor,
-  'stroke-width': 10,
+  'stroke-width': strokeWidth,
   opacity: '0.5',
   'stroke-dasharray': 1,
-  cx: 210,
-  cy: 210,
-  r: 200
+  cx: SIZE / 2,
+  cy: SIZE / 2,
+  r: SIZE / 2 - strokeWidth
 };
 
 const progressStrokeProperties = {
   stroke: strokeColor,
-  'stroke-width': 10,
-  'stroke-dasharray': '0,1680',
-  cx: 210,
-  cy: 210,
-  r: 200
+  'stroke-width': strokeWidth,
+  'stroke-dasharray': `0,${MAX_DASH}`,
+  cx: SIZE / 2,
+  cy: SIZE / 2,
+  r: SIZE / 2 - strokeWidth
 };
 
 function calculateDashArrayProgress(fullTime, currentTime) {
@@ -43,9 +46,9 @@ function calculateDashArrayProgress(fullTime, currentTime) {
 module.exports = (scope) => {
   return m('svg', {
     class: 'progressbar',
-    width: '420px',
-    height: '420px',
-    viewBox: '0 0 420 420'
+    width: `${SIZE}px`,
+    height: `${SIZE}px`,
+    viewBox: `0 0 ${SIZE} ${SIZE}`
   }, [
     m('g', groupProperties, [
       m('circle', backgroundStrokeProperties),
