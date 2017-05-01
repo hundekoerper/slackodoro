@@ -2,28 +2,19 @@
 
 const m = require('mithril');
 const domready = require('domready');
+
 const config = require('./src/config');
 const icon = require('./src/icons/icon');
-const progressCircleView = require('./src/progressCircleView');
+const formatTime = require('./src/util/formatTime');
 
-function padWithZeros(number) {
-  return number < 10 ? `0${number}` : `${number}`;
-}
+const progressCircleView = require('./src/progressCircleView');
+const settingsView = require('./src/settingsView');
 
 function showNotification(message) {
-  const notification = new Notification('Slackodoro', { body: message });
-  notification.silent = config.silentNotification;
-  return notification;
-}
-
-function showSettingsView() {
-  console.log('drrrt');
-}
-
-function timerView(timeInSeconds) {
-  let minutes = Math.floor(timeInSeconds / 60);
-  let seconds = timeInSeconds % 60;
-  return m('time', `${padWithZeros(minutes)}:${padWithZeros(seconds)}`);
+  return new Notification('Slackodoro', {
+    body: message,
+    silent: config.silentNotification.value
+  });
 }
 
 const pomodoroComponent = {
@@ -33,7 +24,8 @@ const pomodoroComponent = {
     vnode.state = {
       isPaused: true,
       currentDuration: 0,
-      time: 0
+      time: 0,
+      settingDialogOpen: false
     };
 
     vnode.state.startTimer = () => {
@@ -70,12 +62,12 @@ const pomodoroComponent = {
   },
   view(vnode) {
     return m('main', [
-      m('aside', [
-        icon('settings', { onclick: showSettingsView })
+      m('section', [
+        icon('settings', { onclick: () => { vnode.state.settingDialogOpen = !vnode.state.settingDialogOpen; } })
       ]),
       m('content', [
         progressCircleView(vnode.state),
-        timerView(vnode.state.time),
+        m('time', formatTime(vnode.state.time)),
       ]),
       m('nav', [
         vnode.state.isPaused
@@ -84,10 +76,11 @@ const pomodoroComponent = {
         icon('stop', { onclick: vnode.state.resetTimer })
       ]),
       m('.durationSelection', [
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.pomodoroDuration); } }, 'Pomodoro'),
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.shortBreakDuration); } }, 'Short break'),
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.longBreakDuration); } }, 'Long Break')
-      ])
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.pomodoroDuration.value); } }, 'Pomodoro'),
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.shortBreakDuration.value); } }, 'Short break'),
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.longBreakDuration.value); } }, 'Long Break')
+      ]),
+      settingsView(vnode.state)
     ]);
   }
 };

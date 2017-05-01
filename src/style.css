@@ -16,19 +16,20 @@ body {
 }
 
 main {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-aside {
+section {
   display: flex;
   justify-content: flex-end;
 
   width: 100%;
 }
 
-aside icon {
+section icon {
   padding: 1rem;
 }
 
@@ -55,6 +56,17 @@ nav {
   margin-bottom: 2rem;
 }
 
+aside {
+  background: rgba(255, 255, 255, .8);
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 2rem;
+  border-radius: 5px;
+}
+
 icon {
   fill: var(--font-color);
   padding: 2rem;
@@ -78,4 +90,8 @@ icon {
   transform: rotate(-90deg);
   transform-origin: center center;
   transition: stroke-dasharray linear 1000ms;
+}
+
+[data-dialog-open="false"] {
+  display: none;
 }
