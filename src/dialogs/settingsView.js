@@ -19,8 +19,6 @@ function checkBoxWidget(property) {
   ]);
 }
 
-
-
 function rangeWidget(property) {
   const options = {
     className: 'sd-range__input',
@@ -33,7 +31,9 @@ function rangeWidget(property) {
     }
   };
   return m('label', {className: 'sd-range'}, [
-    m('span', {className: 'sd-range__label'}, `${config[property].label}: ${formatTime(config[property].value)}s`),
+    m('span', {
+      className: 'sd-range__label'
+    }, `${config[property].label}: ${formatTime(config[property].value)}s`),
     m('input[type="range"]', options)
   ]);
 }
@@ -45,7 +45,7 @@ module.exports = function(scope) {
   }, m('div', {
       className: 'sd-modal__content'
     }, [
-      m('h2', {className: 'sd-headline'} ,'Settings'),
+      m('h2', { className: 'sd-headline' }, 'Settings'),
       checkBoxWidget('silentNotification'),
       rangeWidget('pomodoroDuration'),
       rangeWidget('shortBreakDuration'),

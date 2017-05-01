@@ -1,4 +1,4 @@
-:root {
+:root{
   --sd-grey: #2F2F2F;
   --main-background-color: #f72727;
   --duration-button-background-color: rgba(0, 0, 0, .5);
@@ -9,35 +9,36 @@
   --border-radius: 5px;
   --content-size: 500px;
 }
+
 *{
   outline-color: var(--main-background-color);
 }
 
-body {
+body{
   background: var(--main-background-color);
   color: var(--font-color);
 
   font-family: var(--font-family);
 }
 
-main {
+main{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-section {
+section{
   display: flex;
   justify-content: space-between;
 
   width: 100%;
 }
 
-section icon {
+section icon{
   padding: 1rem;
 }
 
-content {
+content{
   position: relative;
 
   display: flex;
@@ -49,7 +50,7 @@ content {
   height: var(--content-size);
 }
 
-content h3 {
+content h3{
   position: absolute;
   bottom: 130px;
 
@@ -60,20 +61,18 @@ content h3 {
   text-align: center;
 }
 
-time {
+time{
   position: absolute;
 
   font-size: 8rem;
   user-select: none;
 }
 
-nav {
+nav{
   margin-bottom: 2rem;
 }
 
-
-
-icon {
+icon{
   fill: var(--font-color);
   padding: 2rem;
   cursor: pointer;
@@ -92,14 +91,13 @@ icon {
   cursor: pointer;
 }
 
-.progressbar {
+.progressbar{
   transform: rotate(-90deg);
   transform-origin: center center;
   transition: stroke-dasharray linear 1000ms;
 }
 
-
-@keyframes appear {
+@keyframes appear{
   0%{
     opacity: 0;
   }
@@ -129,6 +127,7 @@ icon {
   height: 100%;
   justify-content: center;
 }
+
 .sd-modal__content{
   padding: var(--space);
   display: flex;
@@ -140,10 +139,10 @@ icon {
 }
 
 
-
 .sd-checkbox{
   margin-bottom: var(--space);
 }
+
 .sd-checkbox__input{
   position: absolute;
   visibility: hidden;
@@ -165,9 +164,11 @@ icon {
   color: var(--font-color);
   transition: opacity 120ms ease-in-out;
 }
+
 .sd-checkbox__input:checked ~ .sd-checkbox__text:after{
   opacity: 1;
 }
+
 .sd-checkbox__input:checked ~ .sd-checkbox__text:before{
   background: var(--main-background-color);
 }
@@ -190,6 +191,7 @@ icon {
 .sd-range__label{
   display: block;
 }
+
 .sd-range__input{
   width: 100%;
 }

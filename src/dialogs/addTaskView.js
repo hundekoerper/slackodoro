@@ -8,8 +8,8 @@ module.exports = (scope) => {
     'className': 'sd-modal',
     'data-dialog-open': scope.addTaskDialogOpen.toString()
   }, [
-    m('div', {className: 'sd-modal__content'},[
-      m('h2', {className: 'sd-headline'}, 'Start a Task'),
+    m('div', { className: 'sd-modal__content' }, [
+      m('h2', { className: 'sd-headline' }, 'Start a Task'),
       m('form', {
         onsubmit: (e) => {
           e.preventDefault();
@@ -26,7 +26,7 @@ module.exports = (scope) => {
             scope.currentTaskName = e.target.value;
           }
         }),
-        m('div', {className: 'sd-button-group'}, [
+        m('div', { className: 'sd-button-group' }, [
           m('button[type="button"]', {
             className: 'sd-button sd-button--secondary',
             onclick: (e) => {
