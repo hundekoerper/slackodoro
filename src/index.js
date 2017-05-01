@@ -66,8 +66,18 @@ const pomodoroComponent = {
   view(vnode) {
     return m('main', [
       m('section', [
-        icon('add', { onclick: () => { vnode.state.addTaskDialogOpen = !vnode.state.addTaskDialogOpen; } }),
-        icon('settings', { onclick: () => { vnode.state.settingDialogOpen = !vnode.state.settingDialogOpen; } })
+        icon('add', {
+          onclick: () => {
+            vnode.state.settingDialogOpen = false;
+            vnode.state.addTaskDialogOpen = !vnode.state.addTaskDialogOpen;
+          }
+        }),
+        icon('settings', {
+          onclick: () => {
+            vnode.state.addTaskDialogOpen = false;
+            vnode.state.settingDialogOpen = !vnode.state.settingDialogOpen;
+          }
+        })
       ]),
       m('content', [
         progressCircleView(vnode.state),
