@@ -1,9 +1,9 @@
 'use strict';
 
 const m = require('mithril');
-const config = require('./config');
+const config = require('../config');
 
-const formatTime = require('./util/formatTime');
+const formatTime = require('../util/formatTime');
 
 function checkBoxWidget(property) {
   const options = {

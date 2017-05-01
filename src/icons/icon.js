@@ -4,6 +4,7 @@ const m = require('mithril');
 const fs = require('fs');
 
 const icons = {
+  'add': fs.readFileSync('./src/icons/add.svg', 'utf8'),
   'play': fs.readFileSync('./src/icons/play.svg', 'utf8'),
   'pause': fs.readFileSync('./src/icons/pause.svg', 'utf8'),
   'settings': fs.readFileSync('./src/icons/settings.svg', 'utf8'),

@@ -8,7 +8,8 @@ const icon = require('./src/icons/icon');
 const formatTime = require('./src/util/formatTime');
 
 const progressCircleView = require('./src/progressCircleView');
-const settingsView = require('./src/settingsView');
+const settingsView = require('./src/dialogs/settingsView');
+const addTaskView = require('./src/dialogs/addTaskView');
 
 function showNotification(message) {
   return new Notification('Slackodoro', {
@@ -25,6 +26,7 @@ const pomodoroComponent = {
       isPaused: true,
       currentDuration: 0,
       time: 0,
+      addTaskDialogOpen: false,
       settingDialogOpen: false
     };
 
@@ -63,6 +65,7 @@ const pomodoroComponent = {
   view(vnode) {
     return m('main', [
       m('section', [
+        icon('add', { onclick: () => { vnode.state.addTaskDialogOpen = !vnode.state.addTaskDialogOpen; } }),
         icon('settings', { onclick: () => { vnode.state.settingDialogOpen = !vnode.state.settingDialogOpen; } })
       ]),
       m('content', [
@@ -80,6 +83,7 @@ const pomodoroComponent = {
         m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.shortBreakDuration.value); } }, 'Short break'),
         m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.longBreakDuration.value); } }, 'Long Break')
       ]),
+      addTaskView(vnode.state),
       settingsView(vnode.state)
     ]);
   }
