@@ -45,6 +45,17 @@ content {
   height: var(--content-size);
 }
 
+content h3 {
+  position: absolute;
+  bottom: 130px;
+
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
 time {
   position: absolute;
 

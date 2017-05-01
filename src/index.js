@@ -25,6 +25,7 @@ const pomodoroComponent = {
     vnode.state = {
       isPaused: true,
       currentDuration: 0,
+      currentTaskName: '',
       time: 0,
       addTaskDialogOpen: false,
       settingDialogOpen: false
@@ -71,6 +72,7 @@ const pomodoroComponent = {
       m('content', [
         progressCircleView(vnode.state),
         m('time', formatTime(vnode.state.time)),
+        m('h3', vnode.state.currentTaskName)
       ]),
       m('nav', [
         vnode.state.isPaused
