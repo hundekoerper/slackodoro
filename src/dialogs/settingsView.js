@@ -22,8 +22,8 @@ function checkBoxWidget(property) {
 function rangeWidget(property) {
   const options = {
     className: 'sd-range__input',
-    min: 1,
-    step: 1,
+    min: 30,
+    step: 30,
     max: 2700,
     value: config[property].value,
     oninput: () => {
@@ -33,7 +33,7 @@ function rangeWidget(property) {
   return m('label', {className: 'sd-range'}, [
     m('span', {
       className: 'sd-range__label'
-    }, `${config[property].label}: ${formatTime(config[property].value)}s`),
+    }, `${config[property].label}: ${formatTime(config[property].value)}min`),
     m('input[type="range"]', options)
   ]);
 }
