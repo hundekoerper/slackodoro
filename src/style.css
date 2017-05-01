@@ -1,11 +1,16 @@
 :root {
+  --sd-grey: #2F2F2F;
   --main-background-color: #f72727;
   --duration-button-background-color: rgba(0, 0, 0, .5);
-
+  --space: 16px;
+  --negative-space: -16px;
   --font-color: white;
   --font-family: 'Droid Sans', sans-serif;
-
+  --border-radius: 5px;
   --content-size: 500px;
+}
+*{
+  outline-color: var(--main-background-color);
 }
 
 body {
@@ -16,7 +21,6 @@ body {
 }
 
 main {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,16 +71,7 @@ nav {
   margin-bottom: 2rem;
 }
 
-aside {
-  background: rgba(255, 255, 255, .8);
-  position: absolute;
 
-  display: flex;
-  flex-direction: column;
-
-  padding: 2rem;
-  border-radius: 5px;
-}
 
 icon {
   fill: var(--font-color);
@@ -92,7 +87,7 @@ icon {
   padding: 1rem;
   margin: .5rem;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 
   cursor: pointer;
 }
@@ -103,6 +98,132 @@ icon {
   transition: stroke-dasharray linear 1000ms;
 }
 
-[data-dialog-open="false"] {
+
+@keyframes appear {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.sd-headline{
+  padding: 0;
+  margin: 0;
+  margin-bottom: var(--space);
+  font-weight: bold;
+}
+
+.sd-modal[data-dialog-open="false"] {
   display: none;
+}
+
+.sd-modal{
+  position: fixed;
+  display: flex;
+
+  animation: appear 350ms ease-in-out 1;
+  color: var(--sd-grey);
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+.sd-modal__content{
+  padding: var(--space);
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, .98);
+  width: 400px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 20px 10px rgba(0,0,0,.15);
+}
+
+
+
+.sd-checkbox{
+  margin-bottom: var(--space);
+}
+.sd-checkbox__input{
+  position: absolute;
+  visibility: hidden;
+  z-index: -1;
+  opacity: 0;
+}
+
+
+.sd-checkbox__text{
+  margin-left: calc(var(--space)*1.5);
+  position: relative;
+}
+
+.sd-checkbox__text:after{
+  content: '✔';
+  opacity: 0;
+  position: absolute;
+  left: calc(var(--negative-space)*1.5 + 2px);
+  color: var(--font-color);
+  transition: opacity 120ms ease-in-out;
+}
+.sd-checkbox__input:checked ~ .sd-checkbox__text:after{
+  opacity: 1;
+}
+.sd-checkbox__input:checked ~ .sd-checkbox__text:before{
+  background: var(--main-background-color);
+}
+
+.sd-checkbox__text:before{
+  border-radius: var(--border-radius);
+  position: absolute;
+  transition: background 120ms ease-in-out;
+  content: ' ';
+  border: 1px solid var(--main-background-color);
+  height: var(--space);
+  left: calc(var(--negative-space)*1.5);
+  width: var(--space);
+}
+
+.sd-range{
+  margin-bottom: var(--space);
+}
+
+.sd-range__label{
+  display: block;
+}
+.sd-range__input{
+  width: 100%;
+}
+
+
+.sd-input{
+  padding: .5em 1em;
+  margin-bottom: var(--space);
+  font-size: inherit;
+  font-family: inherit;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+.sd-button{
+  background: var(--main-background-color);
+  color: var(--font-color);
+  padding: .5em 1em;
+  border: none;
+  font-size: inherit;
+  border-radius: var(--border-radius);
+}
+.sd-button--secondary{
+  border: 1px solid var(--main-background-color);
+  color: var(--main-background-color);
+  background: transparent;
+}
+
+.sd-button-group{
+  display: flex;
+  justify-content: flex-end;
+}
+.sd-button-group .sd-button{
+  margin-left: var(--space);
 }
