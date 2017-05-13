@@ -14,6 +14,6 @@
     "qs": "6.4.0"
   },
   "devDependencies": {
-    "electron": "1.6.5"
+    "electron": "1.6.7"
   }
 }
