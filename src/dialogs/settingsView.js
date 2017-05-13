@@ -3,6 +3,7 @@
 const m = require('mithril');
 const config = require('../config');
 
+const askForAuth = require('../authentication/askForAuth');
 const formatTime = require('../util/formatTime');
 
 function checkBoxWidget(property) {
@@ -13,7 +14,7 @@ function checkBoxWidget(property) {
       config[property].value = !config[property].value;
     })
   };
-  return m('label', {className: 'sd-checkbox'},[
+  return m('label', {className: 'sd-checkbox'}, [
     m('input[type="checkbox"]', options),
     m('span', { className: 'sd-checkbox__text'}, `${config[property].label}`)
   ]);
@@ -49,7 +50,8 @@ module.exports = function(scope) {
       checkBoxWidget('silentNotification'),
       rangeWidget('pomodoroDuration'),
       rangeWidget('shortBreakDuration'),
-      rangeWidget('longBreakDuration')
+      rangeWidget('longBreakDuration'),
+      m('button', { onclick: askForAuth }, 'test')
     ])
   );
 };
