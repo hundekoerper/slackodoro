@@ -2,6 +2,7 @@
 
 const m = require('mithril');
 const config = require('../config');
+const icon = require('../icons/icon');
 
 const askForAuth = require('../authentication/askForAuth');
 const formatTime = require('../util/formatTime');
@@ -51,7 +52,7 @@ module.exports = function(scope) {
       rangeWidget('pomodoroDuration'),
       rangeWidget('shortBreakDuration'),
       rangeWidget('longBreakDuration'),
-      m('button', { onclick: askForAuth }, 'test')
+      icon('signin', { onclick: askForAuth })
     ])
   );
 };

@@ -16,11 +16,14 @@ function parseQueryStringsFromUrl(url) {
 }
 
 function requestAccessToken(code) {
-  return fetch('https://slack.com/api/oauth.access', {
+  const urlParams = {
     client_id: credentials.client_id,
     client_secret: credentials.client_secret,
     code
-  });
+  };
+  return fetch(`https://slack.com/api/oauth.access?${qs.stringify(urlParams)}`, {
+    method: 'POST'
+  }).then(res => res.json());
 }
 
 function handleNavigation(url) {
@@ -34,19 +37,19 @@ function handleNavigation(url) {
   });
 }
 
-function logStuff(value) {
-  console.log(value);
-  return value;
+function saveTokenToStorage(response) {
+  if (!response.ok) {
+    throw new Error(response.error);
+  }
+  const accessToken = response.body.access_token;
+  window.localStorage.setItem('slacktoken', accessToken);
 }
 
 module.exports = () => {
   const authWindow = new BrowserWindow({
     width: 500,
     height: 600,
-    show: true,
-    webPreferences: {
-      nodeIntegration: false
-    }
+    show: true
  });
   const urlParams = {
     client_id: credentials.client_id,
@@ -57,16 +60,22 @@ module.exports = () => {
   authWindow.webContents.on('will-navigate', (event, url) => {
     handleNavigation(url)
       .then(requestAccessToken)
-      .then(logStuff)
-      .then(authWindow.close)
+      .then(saveTokenToStorage)
+      .then(() => {
+        authWindow.removeAllListeners('close');
+        authWindow.close();
+      })
       .catch(err => { console.error(err); });
   });
 
   authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
     handleNavigation(newUrl)
       .then(requestAccessToken)
-      .then(logStuff)
-      .then(authWindow.close)
+      .then(saveTokenToStorage)
+      .then(() => {
+        authWindow.removeAllListeners('close');
+        authWindow.close();
+      })
       .catch(err => { console.error(err); });
   });
 
