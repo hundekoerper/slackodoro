@@ -35,9 +35,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// https://github.com/electron/electron/issues/8670
-// remove when chromium bug is fixed
-if (process.env.NODE_ENV === 'development') {
-  app.disableHardwareAcceleration();
-}
