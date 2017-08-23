@@ -42,8 +42,8 @@ const pomodoroComponent = {
         m.redraw();
         if (vnode.state.time === 0) {
           showNotification('Pomodoro done. Time for a break!');
-          clearInterval(counter);
           vnode.state.resetTimer();
+          m.redraw();
         }
       }, 1000);
     };
