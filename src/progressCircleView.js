@@ -1,4 +1,4 @@
-'use strict';
+
 
 const m = require('mithril');
 
@@ -14,7 +14,7 @@ const groupProperties = {
   fill: 'none',
   'fill-rule': 'evenodd',
   'stroke-linecap': 'round',
-  'stroke-linejoin': 'round'
+  'stroke-linejoin': 'round',
 };
 
 const backgroundStrokeProperties = {
@@ -24,7 +24,7 @@ const backgroundStrokeProperties = {
   'stroke-dasharray': 1,
   cx: SIZE / 2,
   cy: SIZE / 2,
-  r: SIZE / 2 - strokeWidth
+  r: SIZE / 2 - strokeWidth,
 };
 
 const progressStrokeProperties = {
@@ -33,7 +33,7 @@ const progressStrokeProperties = {
   'stroke-dasharray': `0,${MAX_DASH}`,
   cx: SIZE / 2,
   cy: SIZE / 2,
-  r: SIZE / 2 - strokeWidth
+  r: SIZE / 2 - strokeWidth,
 };
 
 function calculateDashArrayProgress(fullTime, currentTime) {
@@ -43,18 +43,16 @@ function calculateDashArrayProgress(fullTime, currentTime) {
   return `${currentDash},${MAX_DASH}`;
 }
 
-module.exports = (scope) => {
-  return m('svg', {
-    class: 'progressbar',
-    width: `${SIZE}px`,
-    height: `${SIZE}px`,
-    viewBox: `0 0 ${SIZE} ${SIZE}`
-  }, [
-    m('g', groupProperties, [
-      m('circle', backgroundStrokeProperties),
-      m('circle', Object.assign({}, progressStrokeProperties, {
-        'stroke-dasharray': calculateDashArrayProgress(scope.currentDuration, scope.time)
-      }))
-    ])
-  ]);
-};
+module.exports = scope => m('svg', {
+  class: 'progressbar',
+  width: `${SIZE}px`,
+  height: `${SIZE}px`,
+  viewBox: `0 0 ${SIZE} ${SIZE}`,
+}, [
+  m('g', groupProperties, [
+    m('circle', backgroundStrokeProperties),
+    m('circle', Object.assign({}, progressStrokeProperties, {
+      'stroke-dasharray': calculateDashArrayProgress(scope.currentDuration, scope.time),
+    })),
+  ]),
+]);

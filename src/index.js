@@ -1,4 +1,4 @@
-'use strict';
+
 
 const m = require('mithril');
 const domready = require('domready');
@@ -14,7 +14,7 @@ const addTaskView = require('./src/dialogs/addTaskView');
 function showNotification(message) {
   return new Notification('Slackodoro', {
     body: message,
-    silent: config.silentNotification.value
+    silent: config.silentNotification.value,
   });
 }
 
@@ -28,7 +28,7 @@ const pomodoroComponent = {
       currentTaskName: '',
       time: 0,
       addTaskDialogOpen: false,
-      settingDialogOpen: false
+      settingDialogOpen: false,
     };
 
     vnode.state.startTimer = () => {
@@ -71,35 +71,35 @@ const pomodoroComponent = {
           onclick: () => {
             vnode.state.settingDialogOpen = false;
             vnode.state.addTaskDialogOpen = !vnode.state.addTaskDialogOpen;
-          }
+          },
         }),
         icon('settings', {
           onclick: () => {
             vnode.state.addTaskDialogOpen = false;
             vnode.state.settingDialogOpen = !vnode.state.settingDialogOpen;
-          }
-        })
+          },
+        }),
       ]),
       m('content', [
         progressCircleView(vnode.state),
         m('time', formatTime(vnode.state.time)),
-        m('h3', vnode.state.currentTaskName)
+        m('h3', vnode.state.currentTaskName),
       ]),
       m('nav', [
         vnode.state.isPaused
           ? icon('play', { onclick: vnode.state.startTimer })
           : icon('pause', { onclick: vnode.state.pauseTimer }),
-        icon('stop', { onclick: vnode.state.resetTimer })
+        icon('stop', { onclick: vnode.state.resetTimer }),
       ]),
       m('.durationSelection', [
         m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.pomodoroDuration.value); } }, 'Pomodoro'),
         m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.shortBreakDuration.value); } }, 'Short break'),
-        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.longBreakDuration.value); } }, 'Long Break')
+        m('button[type="button"]', { onclick: () => { vnode.state.setTimer(config.longBreakDuration.value); } }, 'Long Break'),
       ]),
       addTaskView(vnode.state),
-      settingsView(vnode.state)
+      settingsView(vnode.state),
     ]);
-  }
+  },
 };
 
 domready(() => m.mount(document.body, pomodoroComponent));

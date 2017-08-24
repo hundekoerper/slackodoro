@@ -1,20 +1,20 @@
-'use strict';
+
 
 module.exports = {
-  'pomodoroDuration': {
+  pomodoroDuration: {
     label: 'Pomodoro duration',
-    value: 1500
+    value: 1500,
   },
-  'shortBreakDuration': {
+  shortBreakDuration: {
     label: 'Short break duration',
-    value: 300
+    value: 300,
   },
-  'longBreakDuration': {
+  longBreakDuration: {
     label: 'Long break duration',
-    value: 900
+    value: 900,
   },
-  'silentNotification': {
+  silentNotification: {
     label: 'Silence notifications',
-    value: false
-  }
+    value: false,
+  },
 };

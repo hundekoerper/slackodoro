@@ -1,4 +1,4 @@
-'use strict';
+
 
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
@@ -12,7 +12,7 @@ function createWindow() {
   window.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
-    slashes: true
+    slashes: true,
   }));
 
   window.webContents.openDevTools();

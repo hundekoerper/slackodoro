@@ -1,13 +1,13 @@
-'use strict';
+/* global fetch */
 
 const { BrowserWindow } = require('electron').remote;
 const qs = require('qs');
 
-/*eslint-disable camelcase*/
+/* eslint-disable camelcase */
 const credentials = {
   client_id: '',
-  'client_secret': '',
-  scopes: 'users.profile:write'
+  client_secret: '',
+  scopes: 'users.profile:write',
 };
 
 function parseQueryStringsFromUrl(url) {
@@ -19,10 +19,10 @@ function requestAccessToken(code) {
   const urlParams = {
     client_id: credentials.client_id,
     client_secret: credentials.client_secret,
-    code
+    code,
   };
   return fetch(`https://slack.com/api/oauth.access?${qs.stringify(urlParams)}`, {
-    method: 'POST'
+    method: 'POST',
   }).then(res => res.json());
 }
 
@@ -49,11 +49,11 @@ module.exports = () => {
   const authWindow = new BrowserWindow({
     width: 500,
     height: 600,
-    show: true
- });
+    show: true,
+  });
   const urlParams = {
     client_id: credentials.client_id,
-    scope: credentials.scopes
+    scope: credentials.scopes,
   };
   const authUrl = `https://slack.com/oauth/authorize?${qs.stringify(urlParams)}`;
 
@@ -65,7 +65,7 @@ module.exports = () => {
         authWindow.removeAllListeners('close');
         authWindow.close();
       })
-      .catch(err => { console.error(err); });
+      .catch((err) => { console.error(err); });
   });
 
   authWindow.webContents.on('did-get-redirect-request', (event, oldUrl, newUrl) => {
@@ -76,7 +76,7 @@ module.exports = () => {
         authWindow.removeAllListeners('close');
         authWindow.close();
       })
-      .catch(err => { console.error(err); });
+      .catch((err) => { console.error(err); });
   });
 
   authWindow.loadURL(authUrl);
