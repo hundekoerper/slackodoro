@@ -1,4 +1,4 @@
-/* global fetch */
+/* global fetch window */
 
 const { BrowserWindow } = require('electron').remote;
 const qs = require('qs');

@@ -4,7 +4,7 @@ const m = require('mithril');
 const config = require('../config');
 const icon = require('../icons/icon');
 
-const authentication = require('../authentication/authentication');
+const authentication = require('../api/authentication');
 const formatTime = require('../util/formatTime');
 
 function checkBoxWidget(property) {

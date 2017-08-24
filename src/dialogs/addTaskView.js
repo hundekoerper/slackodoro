@@ -1,4 +1,4 @@
-
+/* global window */
 
 const m = require('mithril');
 const config = require('../config');
@@ -25,6 +25,9 @@ module.exports = scope => m('aside', {
         value: scope.currentTaskName,
         oninput: (e) => {
           scope.currentTaskName = e.target.value;
+          if (window.localStorage.getItem('slacktoken')) {
+            setSlackStatus(e.target.value);
+          }
         },
       }),
       m('div', { className: 'sd-button-group' }, [
