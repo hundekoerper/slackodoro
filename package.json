@@ -25,7 +25,7 @@
     "qs": "^6.5.0"
   },
   "lint-staged": {
-    "app/assets/javascripts/**/*.{ts,tsx}": [
+    "src/**/*.js": [
       "prettier",
       "git add"
     ]
