@@ -6,24 +6,23 @@
   "scripts": {
     "start": "electron .",
     "postinstall": "cp -p pre-commit .git/hooks/pre-commit",
-    "precommit": "lint-staged",
-    "lint": "eslint ."
+    "precommit": "lint-staged"
   },
   "author": "Daniel Bechler",
   "license": "ISC",
   "dependencies": {
-    "domready": "1.0.8",
-    "mithril": "1.1.1",
-    "qs": "6.4.0"
+    "domready": "1.0.8"
   },
   "devDependencies": {
-    "electron": "1.6.7",
-    "eslint": "^3.19.0",
+    "electron": "^1.7.5",
+    "eslint": "^4.5.0",
     "eslint-config-airbnb-base": "^11.3.2",
     "eslint-config-prettier": "^2.3.0",
-    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-import": "^2.7.0",
     "lint-staged": "^4.0.4",
-    "prettier": "^1.5.3"
+    "mithril": "^1.1.3",
+    "prettier": "^1.5.3",
+    "qs": "^6.5.0"
   },
   "lint-staged": {
     "app/assets/javascripts/**/*.{ts,tsx}": [
