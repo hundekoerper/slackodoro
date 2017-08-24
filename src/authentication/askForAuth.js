@@ -30,7 +30,7 @@ function handleNavigation(url) {
   return new Promise((resolve, reject) => {
     const urlParams = parseQueryStringsFromUrl(url);
     if (urlParams.error) {
-      return reject(urlParams.error);
+      reject(urlParams.error);
     } else if (urlParams.code) {
       resolve(urlParams.code);
     }
@@ -41,7 +41,7 @@ function saveTokenToStorage(response) {
   if (!response.ok) {
     throw new Error(response.error);
   }
-  const accessToken = response.body.access_token;
+  const accessToken = response.access_token;
   window.localStorage.setItem('slacktoken', accessToken);
 }
 
