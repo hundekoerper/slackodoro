@@ -4,7 +4,10 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "postinstall": "cp -p pre-commit .git/hooks/pre-commit",
+    "precommit": "lint-staged",
+    "lint": "eslint ."
   },
   "author": "Daniel Bechler",
   "license": "ISC",
@@ -14,6 +17,18 @@
     "qs": "6.4.0"
   },
   "devDependencies": {
-    "electron": "1.6.7"
+    "electron": "1.6.7",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-import": "^1.16.0",
+    "lint-staged": "^4.0.4",
+    "prettier": "^1.5.3"
+  },
+  "lint-staged": {
+    "app/assets/javascripts/**/*.{ts,tsx}": [
+      "prettier",
+      "git add"
+    ]
   }
 }
