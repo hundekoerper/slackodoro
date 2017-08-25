@@ -3,8 +3,6 @@
 const m = require('mithril');
 const config = require('../config');
 
-const setSlackStatus = require('../api/setSlackStatus');
-
 module.exports = scope => m('aside', {
   className: 'sd-modal',
   'data-dialog-open': scope.addTaskDialogOpen.toString(),
@@ -25,9 +23,6 @@ module.exports = scope => m('aside', {
         value: scope.currentTaskName,
         oninput: (e) => {
           scope.currentTaskName = e.target.value;
-          if (window.localStorage.getItem('slacktoken')) {
-            setSlackStatus(e.target.value);
-          }
         },
       }),
       m('div', { className: 'sd-button-group' }, [

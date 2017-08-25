@@ -11,6 +11,8 @@ const progressCircleView = require('./src/progressCircleView');
 const settingsView = require('./src/dialogs/settingsView');
 const addTaskView = require('./src/dialogs/addTaskView');
 
+const slackStatus = require('./src/api/slackStatus');
+
 function showNotification(message) {
   return new Notification('Slackodoro', {
     body: message,
@@ -32,8 +34,14 @@ const pomodoroComponent = {
     };
 
     vnode.state.startTimer = () => {
+      const token = window.localStorage.getItem('slacktoken');
+
       if (!vnode.state.time) {
         return;
+      }
+
+      if (vnode.state.currentTaskName && token) {
+        slackStatus.set(vnode.state.currentTaskName);
       }
 
       vnode.state.isPaused = false;
@@ -57,6 +65,7 @@ const pomodoroComponent = {
       vnode.state.isPaused = true;
       clearInterval(counter);
       vnode.state.time = vnode.state.currentDuration;
+      slackStatus.unset();
     };
 
     vnode.state.setTimer = (duration) => {
