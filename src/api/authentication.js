@@ -2,11 +2,12 @@
 
 const { BrowserWindow } = require('electron').remote;
 const qs = require('qs');
+const cred = require('../../credentials.json');
 
 /* eslint-disable camelcase */
 const credentials = {
-  client_id: '',
-  client_secret: '',
+  client_id: cred.client_id,
+  client_secret: cred.client_secret,
   scopes: 'users.profile:write',
 };
 
