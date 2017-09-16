@@ -5,6 +5,8 @@ const domready = require('domready');
 
 const config = require('./src/config');
 const icon = require('./src/icons/icon');
+
+const interval = require('./src/util/interval');
 const formatTime = require('./src/util/formatTime');
 
 const progressCircleView = require('./src/progressCircleView');
@@ -45,7 +47,7 @@ const pomodoroComponent = {
       }
 
       vnode.state.isPaused = false;
-      counter = setInterval(() => {
+      interval.start(() => {
         vnode.state.time--;
         m.redraw();
         if (vnode.state.time === 0) {
@@ -58,12 +60,12 @@ const pomodoroComponent = {
 
     vnode.state.pauseTimer = () => {
       vnode.state.isPaused = true;
-      clearInterval(counter);
+      interval.clear();
     };
 
     vnode.state.resetTimer = () => {
       vnode.state.isPaused = true;
-      clearInterval(counter);
+      interval.clear();
       vnode.state.time = vnode.state.currentDuration;
       slackStatus.unset();
     };
